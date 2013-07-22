@@ -1,0 +1,45 @@
+LeagueItem
+	-Added LeagueItem.java
+	-Added ItemNames, ItemCosts, and ItemIds to LeagueItem
+	-Added parser for an item list
+
+LeagueSummonerSpell
+	-Added LeagueSummonerSpell.java
+	-Added Summoner spell names and ids to LeagueSummonerSpell.java
+	-Added Summoner spells to LeagueGame. Contains spells that the summoner chose for the active game.
+
+MatchHistoryEntry
+	-Added Summoner spells to MatchHistoryEntry. Contains spells that summoners chose that game.
+	-Added item list to MatchHistoryEntry objects. Contains items that the player bought that game
+	-Added _daysAgoPlayed. Contains the amount of days that have passed since the game was played
+	-Added MatchHistoryEntry.getItemList(). Returns a list of the names of the items that the summoner bought that game
+	-Added MatchHistoryEntry.getSpellList(). Returns a list of the spells that a summoner chose for the game.
+	-Added automation of getting the names of summoners from a list of summoner ids that is contained in a MatchHistoryEntry (done in LeagueLibHelper).
+
+LeagueGame
+	-Added LeagueGame.getSpellList(). Returns a list of the spells that a summoner chose for the game.
+
+LeagueRune
+	-Added LeagueRune.java. Object for creating/handling runes.
+	-Added rune name, rune id, rune slot id, and rune tier to LeagueRune
+
+LeagueRunePage
+	-Added LeagueRunePage.java. Object for creating/handling summoner rune pages
+	-Added rune page name, current rune page, runes list to LeagueRunePage.
+
+SummonerService
+	-Modified fillPublicSummonerData to pass setRunePages the rune page list
+
+LeagueSummonerProfile
+	-Added rune page list. Contains all rune pages the summoner has
+	-Added setRunePages. Used during summoner service to fill rune page information
+	-Added getCurrentRunePage. Grabs the summoners current rune page. Returns null if page is empty (for new/lower level accounts)
+	-Added getRunePages. Returns the list of all rune pages for the summoner.
+
+LeagueLibHelper
+	-Added LeagueLibHelper.java. Utility package to make getting some information less tedious.
+	-Added getSummonerTeamInfo(LeagueConnection, LeagueGame, Boolean). Returns a map of all important information about the players in an on going game. If the boolean is true, then the function will return information on the enemy team. If it is false, it will return information for the player team.
+	-Added getSummonerTeamInfoFromMatchHistoryEntry(LeagueConnection, MatchHistoryEntry, Boolean). Returns a map of all important information about the players in a game from a player's match history. If the boolean is true, then the function will return information on the enemy team. If it is false, it will return information for the player team.
+	-Added getMatchHistoryEntries(LeagueConnection, LeagueSummoner). Returns a list of MatchHistoryEntry objects. This function also automates the retrieval of the summoner names that correspond to the summoner ids in the MatchHistoryEntry, so that the entry will contain summoner names as well
+	-Added connectAllAccounts(LeagueConnection). Connects all accounts in the account queue. Returns true if all accounts connected without error, false otherwise.
+	-Added summonerIsRanked(LeagueSummoner). Helper method for team information functions. Checks whether a summoner if ranked or not and returns true/false if they are/aren't. Used in team info functions because we cannot display league information for someone who is unranked.
